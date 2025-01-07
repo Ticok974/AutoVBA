@@ -31,7 +31,7 @@ git clone https://github.com/votre-utilisateur/nom-du-depot.git
 
 ## Auteur
 
-Ulrich CAZANOVE - Expert en automatisation Excel VBA
+MultiBrasServices - Expert en automatisation Excel VBA
 
 ## Licence
 
