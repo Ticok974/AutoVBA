@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- ==================== SECTION HTML ==================== -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Security-Policy" content="default-src &apos;self&apos; https:; script-src &apos;self&apos; &apos;unsafe-inline&apos; https:; style-src &apos;self&apos; &apos;unsafe-inline&apos; https:; img-src &apos;self&apos; data: https:;">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-XSS-Protection" content="1; mode=block">
+<title>VBA | Solutions d&apos;automatisation bancaire</title>
+
+<!-- ==================== SECTION CSS ==================== -->
+<style>
+:root {
+  --primary: #1a4f7a;  
+  --secondary: #2980b9; 
+  --accent: #27ae60;   
+  --light: #f5f7fa;    
+  --dark: #2c3e50;     
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  color: var(--dark);
+  background-color: var(--light);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Navigation */
+.navbar {
+  background: var(--primary);
+  padding: 1rem 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--secondary);
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  display: flex;
+  align-items: center;
+  color: white;
+  padding-top: 60px;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: slideIn 1s ease-out;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+.cta-button {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: transform 0.3s, background 0.3s;
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards;
+  animation-delay: 1s;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  background: #c0392b;
+}
+
+/* Features Section */
+.features, .case-study, .contact, .testimonials {
+  padding: 5rem 0;
+}
+
+.features, .contact, .testimonials {
+  background: var(--light);
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.feature-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 1.5rem;
+  color: var(--accent);
+}
+
+/* Case Study Section */
+.case-study {
+  background: white;
+}
+
+.case-study-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.case-study-text {
+  padding: 2rem;
+}
+
+.case-study-diagram {
+  background: var(--light);
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+/* Testimonials Section */
+.testimonials {
+  background: white;
+  padding: 5rem 0;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.testimonial-card {
+  background: var(--light);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.testimonial-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.client-info {
+  margin-left: 1rem;
+}
+
+.client-name {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.client-company {
+  font-size: 0.9rem;
+  color: var(--dark);
+  opacity: 0.8;
+}
+
+.testimonial-content {
+  font-style: italic;
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+.results {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  font-weight: 500;
+  color: var(--accent);
+}
+
+/* Contact Form */
+.contact-form {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: inherit;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.checkbox-group {
+  margin: 1rem 0;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: normal;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: auto;
+}
+
+.file-input-wrapper {
+  position: relative;
+  margin-top: 1rem;
+}
+
+.file-input-wrapper input[type="file"] {
+  display: none;
+}
+
+.file-input-label {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background: var(--secondary);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.file-input-label:hover {
+  background: var(--primary);
+}
+
+.file-name {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--dark);
+}
+
+.submit-button {
+  background: var(--accent);
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  width: 100%;
+}
+
+.submit-button:hover {
+  background: #219653;
+}
+
+.submit-button:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  animation: shake 0.5s linear;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+/* About Section */
+.about {
+  background: white;
+  padding: 5rem 0;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr;  
+  gap: 3rem;
+  align-items: center;
+}
+
+.about-text h3 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.about-text p {
+  margin-bottom: 1rem;
+}
+
+.expertise-list {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.expertise-list li {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Footer */
+.footer {
+  background: var(--primary);
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Success Message Animation */
+@keyframes checkmark {
+  0% {
+    stroke-dasharray: 0,150;
+  }
+  100% {
+    stroke-dasharray: 150,150;
+  }
+}
+
+.success-checkmark path {
+  animation: checkmark 1s ease-in-out forwards;
+}
+
+/* Loading Spinner Animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: var(--primary);
+    padding: 1rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transform: translateY(-150%);
+    transition: transform 0.3s ease;
+  }
+
+  .nav-links.active {
+    transform: translateY(0);
+  }
+
+  .mobile-menu-btn {
+    display: block;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .hero {
+    padding-top: 80px;
+    text-align: center;
+  }
+
+  .hero-content {
+    padding: 0 1rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .case-study-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form {
+    padding: 1.5rem;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .feature-card {
+    padding: 1.5rem;
+  }
+
+  .testimonial-card {
+    padding: 1.5rem;
+  }
+
+  .file-input-label {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.submissions-table-wrapper {
+  overflow-x: auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  margin-top: 2rem;
+}
+
+.submissions-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.submissions-table th,
+.submissions-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.submissions-table th {
+  background: var(--primary);
+  color: white;
+  font-weight: 500;
+}
+
+.submissions-table tr:hover {
+  background: #f8f9fa;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.status-new {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.status-processing {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.status-completed {
+  background: #e8f5e9;
+  color: #388e3c;
+}
+
+@media (max-width: 768px) {
+  .submissions-table-wrapper {
+    margin: 1rem -15px;
+    border-radius: 0;
+  }
+}
+</style>
+<!-- ==================== SECTION JAVASCRIPT ==================== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.3/purify.min.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "@aws-sdk/client-s3": "https://cdn.skypack.dev/@aws-sdk/client-s3",
+    "@aws-sdk/s3-request-presigner": "https://cdn.skypack.dev/@aws-sdk/s3-request-presigner",
+    "compressorjs": "https://cdn.skypack.dev/compressorjs"
+  }
+}
+</script>
+<script>
+const BASE_API_URL = 'https://multibrasservices.com/';
+let emailQueue = [];
+const EMAIL_API_ENDPOINT = `${BASE_API_URL}/send-email`;
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
+const ALLOWED_FILE_TYPES = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'text/csv'];
+const RATE_LIMIT = {
+  maxRequests: 5,
+  timeWindow: 60 * 60 * 1000,
+  requests: new Map()
+};
+const S3_CONFIG = {
+  region: 'eu-west-1',
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+  },
+  bucket: 'autobank-uploads'
+};
+const DB_CONFIG = {
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD
+};
+
+const CACHE_CONFIG = {
+  maxAge: 5 * 60 * 1000, // 5 minutes
+  submissions: new Map(),
+  lastFetch: null
+};
+
+const COMPRESSION_CONFIG = {
+  quality: 0.8,
+  maxWidth: 2048,
+  maxHeight: 2048,
+  convertSize: 5000000 // 5MB threshold for compression
+};
+
+async function generateCsrfToken() {
+  const timestamp = Date.now();
+  const randomString = Math.random().toString(36).substring(7);
+  const message = `${timestamp}:${randomString}`;
+  
+  const secret = 'default_secret_key'; // Devrait être synchronisé avec le serveur
+  const encoder = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    'raw',
+    encoder.encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+  
+  const signature = await crypto.subtle.sign(
+    'HMAC',
+    key,
+    encoder.encode(message)
+  );
+  
+  const hexSignature = Array.from(new Uint8Array(signature))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+    
+  return `${message}:${hexSignature}`;
+}
+
+async function getUserIP() {
+  try {
+    const response = await fetch('https://api.ipify.org?format=json');
+    const data = await response.json();
+    return data.ip;
+  } catch (error) {
+    return 'unknown';
+  }
+}
+
+async function uploadFile(file) {
+  if (file.size > MAX_FILE_SIZE) {
+    throw new Error('Le fichier est trop volumineux (maximum 10MB)');
+  }
+  
+  if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+    throw new Error('Format de fichier non supporté. Utilisez Excel (.xls, .xlsx) ou CSV');
+  }
+
+  let compressedFile = file;
+  if (file.size > COMPRESSION_CONFIG.convertSize) {
+    try {
+      compressedFile = await new Promise((resolve, reject) => {
+        new Compressor(file, {
+          quality: COMPRESSION_CONFIG.quality,
+          maxWidth: COMPRESSION_CONFIG.maxWidth,
+          maxHeight: COMPRESSION_CONFIG.maxHeight,
+          success(result) {
+            resolve(result);
+          },
+          error(err) {
+            reject(err);
+          }
+        });
+      });
+    } catch (error) {
+      console.warn('Compression failed, using original file:', error);
+    }
+  }
+
+  const formData = new FormData();
+  formData.append('file', compressedFile);
+
+  try {
+    // Upload to S3 via API endpoint
+    const response = await fetch(`${BASE_API_URL}/upload`, {
+      method: 'POST',
+      headers: {
+        'X-Security-Token': await getSecurityToken()
+      },
+      body: formData
+    });
+
+    if (!response.ok) {
+      throw new Error('Erreur lors du téléchargement');
+    }
+
+    const data = await response.json();
+    return data.fileUrl; // S3 URL of uploaded file
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    throw error;
+  }
+}
+
+async function submitForm(formData, csrfToken) {
+  const userIp = await getUserIP();
+  const now = Date.now();
+
+  // Rate limiting check
+  const userRequests = RATE_LIMIT.requests.get(userIp) || [];
+  const recentRequests = userRequests.filter(time => now - time < RATE_LIMIT.timeWindow);
+  
+  if (recentRequests.length >= RATE_LIMIT.maxRequests) {
+    throw new Error('Trop de requêtes. Veuillez réessayer plus tard.');
+  }
+
+  recentRequests.push(now);
+  RATE_LIMIT.requests.set(userIp, recentRequests);
+
+  // Validate email
+  if (!EMAIL_REGEX.test(formData.email)) {
+    throw new Error('Format d\'email invalide');
+  }
+
+  // Sanitize data
+  const sanitizedData = {
+    ...formData,
+    name: DOMPurify.sanitize(formData.name),
+    email: DOMPurify.sanitize(formData.email), 
+    company: DOMPurify.sanitize(formData.company),
+    details: DOMPurify.sanitize(formData.details),
+    created_at: new Date().toISOString(),
+    status: 'NEW'
+  };
+
+  try {
+    // Submit to database via API
+    const response = await fetch(`${BASE_API_URL}/submissions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': csrfToken
+      },
+      body: JSON.stringify(sanitizedData)
+    });
+
+    if (!response.ok) {
+      throw new Error('Erreur lors de la soumission');
+    }
+
+    const submission = await response.json();
+    
+    // Update cache with new submission
+    CACHE_CONFIG.submissions.set(submission.id, submission);
+    
+    return submission;
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    throw error;
+  }
+}
+
+async function fetchSubmissions() {
+  const now = Date.now();
+  
+  // Return cached data if within maxAge
+  if (CACHE_CONFIG.lastFetch && 
+      (now - CACHE_CONFIG.lastFetch < CACHE_CONFIG.maxAge) &&
+      CACHE_CONFIG.submissions.size > 0) {
+    return Array.from(CACHE_CONFIG.submissions.values());
+  }
+
+  try {
+    const response = await fetch(`${BASE_API_URL}/submissions`, {
+      headers: {
+        'X-Security-Token': await getSecurityToken()
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch submissions');
+    }
+
+    const data = await response.json();
+  
+    // Update cache
+    CACHE_CONFIG.submissions.clear();
+    data.submissions.forEach(submission => {
+      CACHE_CONFIG.submissions.set(submission.id, submission);
+    });
+    CACHE_CONFIG.lastFetch = now;
+
+    return data.submissions;
+  } catch (error) {
+    console.error('Error fetching submissions:', error);
+    // Return cached data if available, even if expired
+    if (CACHE_CONFIG.submissions.size > 0) {
+      return Array.from(CACHE_CONFIG.submissions.values());
+    }
+    return [];
+  }
+}
+
+function handleFormSuccess(submission) {
+  // Invalidate cache after successful submission
+  CACHE_CONFIG.lastFetch = null;
+  CACHE_CONFIG.submissions.clear();
+
+  const form = document.getElementById('contact-form');
+  
+  form.innerHTML = `
+    <div style="text-align: center; padding: 2rem;">
+      <svg viewBox="0 0 24 24" width="48" height="48" stroke="var(--accent)" fill="none" stroke-width="2">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14">
+          <animate attributeName="stroke-dasharray" from="0,150" to="150,150" dur="1s" fill="freeze"/>
+        </path>
+        <path d="M22 4L12 14.01l-3-3">
+          <animate attributeName="stroke-dasharray" from="0,50" to="50,50" dur="0.5s" fill="freeze" begin="0.6s"/>
+        </path>
+      </svg>
+      <h3 style="color: var(--accent); margin: 1rem 0;">Message envoyé avec succès!</h3>
+      <p>Nous vous recontacterons dans les plus brefs délais.</p>
+      <p style="margin-top: 1rem; font-size: 0.9em; color: var(--dark);">
+        Un email de confirmation a été envoyé à ${submission.email}<br>
+        Référence: #${submission.id}
+      </p>
+    </div>
+  `;
+}
+</script>
+</head>
+<body>
+<nav class="navbar">
+  <div class="container nav-content">
+    <a href="https://multibrasservices.com/" class="logo">VBA</a>
+    <button class="mobile-menu-btn">
+      <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+        <path d="M3 12h18M3 6h18M3 18h18"/>
+      </svg>
+    </button>
+    <div class="nav-links">
+      <a href="#features">Fonctionnalit&#xe9;s</a>
+      <a href="#case-study">Cas Pratique</a>
+      <a href="#about">&#xc0; propos</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>Optimisez vos processus avec VBA : Le couteau suisse de l’automatisation Excel</h1>
+      <p>Des solutions sur mesure pour automatiser vos tâches répétitives et gagner un temps précieux.</p>
+      <a href="#gpts-assistant" class="cta-button">Commencez votre automatisation dès aujourd’hui !</a>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="container">
+    <h2 class="section-title">Nos Solutions</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5m-4 0l3 3m0 0l3-3m-3 3V6"/>
+        </svg>
+        <h3>Import Automatique</h3>
+        <p>Importation automatique des relev&#xe9;s bancaires dans vos fichiers Excel, quel que soit le format.</p>
+      </div>
+      
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+        </svg>
+        <h3>Rapprochement Intelligent</h3>
+        <p>Algorithmes personnalis&#xe9;s pour matcher automatiquement vos op&#xe9;rations bancaires.</p>
+      </div>
+      
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M8 7v8a2 2 0 0 0 2 2h6M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M8 7h6M8 7h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M16 7h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/>
+          <path d="M12 11h4"/>
+          <path d="M12 16h4"/>
+        </svg>
+        <h3>Export Personnalis&#xe9;</h3>
+        <p>G&#xe9;n&#xe9;ration automatique de rapports selon vos besoins sp&#xe9;cifiques.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case-study" id="case-study">
+  <div class="container">
+    <h2 class="section-title">Cas Pratique</h2>
+    <div class="case-study-content">
+      <div class="case-study-text">
+        <h3>Cabinet comptable : Gain de 15h par mois</h3>
+        <p>Un cabinet comptable traitant plus de 500 transactions mensuelles a r&#xe9;duit son temps de traitement de 20h &#xe0; 5h gr&#xe2;ce &#xe0; notre solution automatis&#xe9;e.</p>
+        <ul>
+          <li>Import automatique des relev&#xe9;s bancaires</li>
+          <li>Reconnaissance intelligente des transactions r&#xe9;currentes</li>
+          <li>G&#xe9;n&#xe9;ration automatique des &#xe9;critures comptables</li>
+        </ul>
+      </div>
+      <div class="case-study-diagram">
+        <svg viewBox="0 0 200 200" width="100%" height="200">
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#3498db" stroke-width="20" stroke-dasharray="502" stroke-dashoffset="125">
+            <animate attributeName="stroke-dashoffset" from="502" to="125" dur="2s" fill="freeze"/>
+          </circle>
+          <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="#2c3e50" font-size="24">75%</text>
+          <text x="100" y="130" text-anchor="middle" dominant-baseline="middle" fill="#2c3e50" font-size="14">Temps gagn&#xe9;</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gpts-assistant" id="gpts-assistant">
+  <div class="container">
+    <h2 class="section-title">Assistant GPTs pour Audit Excel</h2>
+    <a href="#gpts-assistant" style="text-decoration: none;">
+      <div class="assistant-image" style="position: fixed; top: 5%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;">
+        <div style="position: relative;">
+            <a href="#gpts-assistant" style="text-decoration: none;">
+            <div style="
+              position: relative;
+              width: 40px;
+              height: 40px;
+              border-radius: 80%;
+              overflow: hidden;
+              box-shadow: 0 0 25px 14px rgba(255,255,255,0.5);
+              transition: all 0.1s ease;
+              cursor: pointer;
+            ">
+              <img src="images/Gpts.png" alt="Illustration Assistant GPTs" 
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  transition: transform 0.3s ease;
+                ">
+              <div style="
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.3);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                border-radius: 100%;
+              "></div>
+            </div>
+          </a>
+          <style>
+            .assistant-image:hover div {
+              transform: scale(1.2);
+              box-shadow: 0 0 11px 11px rgba(255,255,255,0.6);
+            }
+            .assistant-image:hover img {
+              transform: scale(1.1);
+            }
+            .assistant-image:hover div div {
+              opacity: 0.75;
+            }
+          </style>
+        </div>
+      </div>
+    </a>
+    <div class="assistant-content">
+      <div class="assistant-card">
+        <h3>Clarifiez vos besoins avec notre Assistant IA</h3>
+        <p>Utilisez notre assistant GPTs spécialisé pour analyser vos besoins en automatisation Excel :</p>
+        <a href="https://chatgpt.com/g/g-67772940a6348191bbf8915bb4794c3e-audit-excel" class="cta-button" target="_blank">
+          Accéder à l'Assistant GPTs
+        </a>
+        <div class="instructions">
+          <h4>Comment utiliser l'assistant :</h4>
+          <ol>
+            <li>Cliquez sur le bouton ci-dessus pour ouvrir l'assistant</li>
+            <li>Décrivez vos besoins en automatisation Excel</li>
+            <li>L'assistant générera un compte rendu détaillé</li>
+            <li>Copiez ce compte rendu</li>
+            <li>Collez-le dans le champ "Détails" du formulaire Tally ci-dessous</li>
+          </ol>
+          <p>Cet outil vous aidera à clarifier vos besoins et nous permettra de vous proposer une solution plus adaptée.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="container">
+    <h2 class="section-title">&#xc0; propos</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <h3>Ulrich CAZANOVE</h3>
+        <p>Fort de 20 ans d&apos;exp&#xe9;rience en comptabilit&#xe9; et d&#xe9;veloppement VBA, je mets mon expertise au service de votre entreprise pour optimiser vos processus comptables.</p>
+        <p>Comptable de formation et passionn&#xe9; de d&#xe9;veloppement, je cr&#xe9;e des solutions sur mesure qui r&#xe9;pondent pr&#xe9;cis&#xe9;ment &#xe0; vos besoins sp&#xe9;cifiques.</p>
+        <ul class="expertise-list">
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+            Expert en automatisation VBA Excel
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+            20 ans d&apos;exp&#xe9;rience en comptabilit&#xe9;
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+            Solutions personnalis&#xe9;es pour chaque client
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <h2 class="section-title">Demande de Solution Personnalis&#xe9;e</h2>
+    <script async src="https://tally.so/widgets/embed.js"></script>
+    <iframe 
+      data-tally-src="https://tally.so/embed/npReaP?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
+      loading="lazy" 
+      width="100%" 
+      height="300" 
+      frameborder="0" 
+      marginheight="0" 
+      marginwidth="0" 
+      title="Demande de solution personnalisée">
+    </iframe>
+  </div>
+</section>
+
+<section class="submissions" id="submissions" style="display: none;">
+  <div class="container">
+    <h2 class="section-title">Demandes Re&#xe7;ues</h2>
+    <div class="submissions-table-wrapper">
+      <table class="submissions-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Nom</th>
+            <th>Entreprise</th>
+            <th>Type de Solution</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody id="submissions-table-body">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    &#xa9; 2025 Ulrich CAZANOVE &#x2013; Tous droits r&#xe9;serv&#xe9;s
+  </div>
+</footer>
+
+
+<script>
+const observerOptions = {
+  threshold: 0.1
+};
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = "1";
+      entry.target.style.transform = "translateY(0)";
+    }
+  });
+}, observerOptions);
+document.querySelectorAll('.feature-card, .case-study-content, .contact-form').forEach(element => {
+  element.style.opacity = "0";
+  element.style.transform = "translateY(20px)";
+  element.style.transition = "all 0.6s ease-out";
+  observer.observe(element);
+});
+document.querySelectorAll('.testimonial-card').forEach(element => {
+  element.style.opacity = "0";
+  element.style.transform = "translateY(20px)";
+  element.style.transition = "all 0.6s ease-out";
+  observer.observe(element);
+});
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({
+      behavior: 'smooth'
+    });
+  });
+});
+document.getElementById('contact-form').addEventListener('submit', async function handleFormSubmission(e) {
+  e.preventDefault();
+  const form = e.target;
+  const submitButton = form.querySelector('.submit-button');
+  const formData = new FormData(form);
+  
+  // Validate required fields
+  for (const [key, value] of formData.entries()) {
+    if (form[key].hasAttribute('required') && !value) {
+      handleFormError(form, submitButton, `Le champ ${form[key].labels[0].textContent} est requis`);
+      return;
+    }
+  }
+
+  submitButton.disabled = true;
+  submitButton.textContent = 'Envoi en cours...';
+
+  try {
+    // Generate CSRF token
+    const csrfToken = await generateCsrfToken();
+    
+    const data = {
+      name: form.name.value,
+      email: form.email.value,
+      company: form.company.value,
+      solutionType: form['solution-type'].value,
+      details: form.details.value,
+      features: Array.from(form.querySelectorAll('input[name="features[]"]:checked')).map(cb => cb.value)
+    };
+
+    const fileInput = form.querySelector('#sample-file');
+    if (fileInput.files.length > 0) {
+      const fileUrl = await uploadFile(fileInput.files[0]);
+      data.sampleFileUrl = fileUrl;
+    }
+
+    // Direct submission to backend API
+    const submission = await submitForm(data, csrfToken);
+    handleFormSuccess(submission);
+    
+    // Update submissions table
+    const submissions = await fetchSubmissions();
+    renderSubmissions(submissions);
+    document.getElementById('submissions').style.display = 'block';
+    document.getElementById('submissions').scrollIntoView({
+      behavior: 'smooth'
+    });
+
+  } catch (error) {
+    handleFormError(form, submitButton, error.message);
+    console.error('Error updating submissions:', error);
+  }
+});
+document.getElementById('sample-file').addEventListener('change', function (e) {
+  const fileName = e.target.files[0]?.name;
+  const fileDisplay = document.getElementById('file-name-display');
+  if (fileName) {
+    fileDisplay.textContent = fileName;
+    fileDisplay.style.color = 'var(--primary)';
+  } else {
+    fileDisplay.textContent = '';
+  }
+});
+document.getElementById('solution-type').addEventListener('change', function (e) {});
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+const navLinks = document.querySelector('.nav-links');
+mobileMenuBtn.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (navLinks.classList.contains('active')) {
+      navLinks.classList.remove('active');
+    }
+  });
+});
+document.addEventListener('click', e => {
+  if (!e.target.closest('.navbar') && navLinks.classList.contains('active')) {
+    navLinks.classList.remove('active');
+  }
+});
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+    navLinks.classList.remove('active');
+  }
+});
+async function fetchSubmissions() {
+  const now = Date.now();
+  
+  // Return cached data if within maxAge
+  if (CACHE_CONFIG.lastFetch && 
+      (now - CACHE_CONFIG.lastFetch < CACHE_CONFIG.maxAge) &&
+      CACHE_CONFIG.submissions.size > 0) {
+    return Array.from(CACHE_CONFIG.submissions.values());
+  }
+
+  try {
+    const response = await fetch(`${BASE_API_URL}/submissions`, {
+      headers: {
+        'X-Security-Token': await getSecurityToken()
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch submissions');
+    }
+
+    const data = await response.json();
+  
+    // Update cache
+    CACHE_CONFIG.submissions.clear();
+    data.submissions.forEach(submission => {
+      CACHE_CONFIG.submissions.set(submission.id, submission);
+    });
+    CACHE_CONFIG.lastFetch = now;
+
+    return data.submissions;
+  } catch (error) {
+    console.error('Error fetching submissions:', error);
+    // Return cached data if available, even if expired
+    if (CACHE_CONFIG.submissions.size > 0) {
+      return Array.from(CACHE_CONFIG.submissions.values());
+    }
+    return [];
+  }
+}
+function renderSubmissions(submissions) {
+  const tbody = document.getElementById('submissions-table-body');
+  tbody.innerHTML = submissions.map(sub => `
+    <tr>
+      <td>${new Date(sub.created_at).toLocaleDateString()}</td>
+      <td>${DOMPurify.sanitize(sub.name)}</td>
+      <td>${DOMPurify.sanitize(sub.company || '-')}</td>
+      <td>${DOMPurify.sanitize(sub.solutionType)}</td>
+      <td>
+        <span class="status-badge status-${sub.status.toLowerCase()}">
+          ${DOMPurify.sanitize(sub.status)}
+        </span>
+      </td>
+    </tr>
+  `).join('');
+}
+window.addEventListener('load', async () => {
+  try {
+    const submissions = await fetchSubmissions();
+    if (submissions.length > 0) {
+      document.getElementById('submissions').style.display = 'block';
+      renderSubmissions(submissions);
+    }
+  } catch (error) {
+    console.error('Error loading submissions:', error);
+  }
+});
+function handleFormError(form, submitButton, message) {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Commencez votre automatisation dès aujourd’hui !';
+  const errorDiv = document.createElement('div');
+  errorDiv.className = 'error-message';
+  errorDiv.style.color = '#e74c3c';
+  errorDiv.style.padding = '1rem';
+  errorDiv.style.marginTop = '1rem';
+  errorDiv.style.background = '#fceaea';
+  errorDiv.style.borderRadius = '5px';
+  errorDiv.textContent = message;
+  form.appendChild(errorDiv);
+}
+
+// Validation côté client
+const form = document.getElementById('monFormulaire');
+
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+  
+  if (validateForm()) {
+    submitForm();
+  }
+});
+
+function validateForm() {
+  // Validation des champs obligatoires
+  const name = form.querySelector('#name').value.trim();
+  const email = form.querySelector('#email').value.trim();
+  const solutionType = form.querySelector('#solution-type').value;
+  
+  if (!name) {
+    alert('Veuillez entrer votre nom');
+    return false;
+  }
+  
+  if (!email || !EMAIL_REGEX.test(email)) {
+    alert('Veuillez entrer une adresse email valide');
+    return false;
+  }
+  
+  if (!solutionType) {
+    alert('Veuillez sélectionner un type de solution');
+    return false;
+  }
+  
+  return true;
+}
+
+function submitForm() {
+  const formData = new FormData(form);
+  
+  fetch('/traitement-formulaire', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Succès:', data);
+    handleFormSuccess(data);
+  })
+  .catch((error) => {
+    console.error('Erreur:', error);
+    handleFormError(form, form.querySelector('.submit-button'), 'Une erreur est survenue lors de l\'envoi du formulaire');
+  });
+}
+</script>
+</body></html>
