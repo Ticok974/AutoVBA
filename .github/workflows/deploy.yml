@@ -33,3 +33,4 @@ jobs:
         password: ${{ secrets.OVH_FTP_PASSWORD }}
         localDir: './dist/'
         remoteDir: './www/'
+        forceSsl: true
