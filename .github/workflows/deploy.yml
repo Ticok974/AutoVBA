@@ -2,9 +2,9 @@ name: Deploy to OVH
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   deploy:
@@ -26,10 +26,10 @@ jobs:
       run: npm run build
 
     - name: Deploy to OVH
-      uses: ovh/action-web-deploy@v1
+      uses: sebastianpopp/ftp-action@releases/v2
       with:
-        ftp-host: ${{ secrets.OVH_FTP_HOST }}
-        ftp-user: ${{ secrets.OVH_FTP_USER }}
-        ftp-password: ${{ secrets.OVH_FTP_PASSWORD }}
-        local-dir: './dist'
-        remote-dir: './www'
+        host: ${{ secrets.OVH_FTP_HOST }}
+        user: ${{ secrets.OVH_FTP_USER }}
+        password: ${{ secrets.OVH_FTP_PASSWORD }}
+        localDir: './dist/'
+        remoteDir: './www/'
