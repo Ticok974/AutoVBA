@@ -5,6 +5,12 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: false
+        default: 'production'
 
 jobs:
   deploy:
@@ -26,11 +32,10 @@ jobs:
       run: npm run build
 
     - name: Deploy to OVH
-      uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      uses: sebastianpopp/ftp-action@releases/v2
       with:
-        server: ${{ secrets.OVH_FTP_HOST }}
-        username: ${{ secrets.OVH_FTP_USER }}
+        host: ${{ secrets.OVH_FTP_HOST }}
+        user: ${{ secrets.OVH_FTP_USER }}
         password: ${{ secrets.OVH_FTP_PASSWORD }}
-        local-dir: './dist/'
-        server-dir: './www/'
-        protocol: ftps
+        localDir: './dist/'
+        remoteDir: './www/'

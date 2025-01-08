@@ -4,7 +4,7 @@
   "description": "AutoBank VBA Application",
   "main": "index.js",
   "scripts": {
-    "build": "echo 'Build complete'"
+    "build": "mkdir -p dist && cp -r index.html images/ dist/"
   },
   "author": "",
   "license": "MIT"
