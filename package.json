@@ -1,0 +1,11 @@
+{
+  "name": "autobank-vba",
+  "version": "1.0.0",
+  "description": "AutoBank VBA Application",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo 'Build complete'"
+  },
+  "author": "",
+  "license": "MIT"
+}
