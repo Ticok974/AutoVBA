@@ -1,0 +1,18 @@
+; OVH Configuration File
+app.engine=php
+app.engine.version=8.1
+
+http.firewall=none
+environment=production
+
+; Cache configuration
+cache.engine=file
+cache.mode=prod
+
+; Compression
+http.compression=on
+http.compressionLevel=6
+
+; Error pages
+errorPages.enabled=1
+errorPages.defaultMessage="Une erreur est survenue"
