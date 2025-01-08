@@ -26,11 +26,11 @@ jobs:
       run: npm run build
 
     - name: Deploy to OVH
-      uses: sebastianpopp/ftp-action@releases/v2
+      uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
-        host: ${{ secrets.OVH_FTP_HOST }}
-        user: ${{ secrets.OVH_FTP_USER }}
+        server: ${{ secrets.OVH_FTP_HOST }}
+        username: ${{ secrets.OVH_FTP_USER }}
         password: ${{ secrets.OVH_FTP_PASSWORD }}
-        localDir: './dist/'
-        remoteDir: './www/'
-        forceSsl: true
+        local-dir: './dist/'
+        server-dir: './www/'
+        protocol: ftps
